@@ -7,7 +7,7 @@ test('Verify login with valid credentials', async ({ page }) => {
 
   await page.locator('//input[@name="username"]').fill("Admin")
 
-await page.locator("//input[@type='password']").fill("admin123")
+await page.locator("//input[@type='password']").fill('admin123')
 
 await page.locator("//button[@type='submit']").click()
 
@@ -74,15 +74,3 @@ await expect(page.locator("//p[text()='Invalid credentials']")).toBeVisible()
 })
 
 
-//method 2
-
-// test('Verify login with valid username and invalid [assword', async ({ page }) => {
-//   await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-
-//   await page.locator("//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input").fill("Admin")
-
-// await page.locator("//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[2]/div/div[2]/input").fill("nvchjdj")
-
-// await page.locator("//*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button").click()
-
-// await expect(page.locator(""))
