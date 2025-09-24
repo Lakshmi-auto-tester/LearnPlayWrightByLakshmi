@@ -1,28 +1,29 @@
 import { test, expect } from '@playwright/test';
 import data from  '../testdata/demoqa.json'
-//import data from "../testdata/demoqa.json"
-//import data from '../testdata/demoqa.json'
-//import data from '../../testdata/demoqa.json' assert{type: 'json' 
-  //  };
-//import data from '../../testdata/demoqa.json' assert { type: 'json' };
 
 test('Verify demo qa text bos fields', async ({ page }) => {
 
     await page.goto("https://demoqa.com/")
 
-    await  page.locator("(//div[contains(@class,'avatar mx-auto')])[1]").click()
+    await  page.locator("//h5[text()='Elements']").click()
+    await page.locator("//span[text()='Text Box']").click()
 
-    await page.locator("(//li[@id='item-0'])[1]").click()
-    await expect(page).toHaveURL("https://demoqa.com/text-box")
-    await page.locator("//input[@placeholder='FullName']").fill("data.FullName")
-    //await page.locator("//input[@placeholder='FullName']").pressSequentially("data.FullName",{delay:5000})
-    await page.locator("//input[@id='userEmail']").fill("data.email")
-    await page.locator("(#currentaddress").fill("data.currentaddress")
-    await page.locator("#permanentaddress").fill("data.permanentaddress")
-    await page.locator("#submit").click()
-    await expect(page.locator("#name")).toContainText("Lucky")
-    await expect(page.locator("#email")).toContainText("Lucky89@gmail.com")
-    await expect(page.locator("#currentAddress")).toBeVisible()
-    await expect(page.locator("#permanentAddress")).toContainText("Bangalore")
+    
+    //await page.locator("//input[@placeholder='Full Name']").fill(data.FullName)
+
+    await page.locator("//input[@placeholder='Full Name']").pressSequentially(data.FullName,{delay:5000})
+    await page.locator("//input[@placeholder='name@example.com']").fill(data.email)
+    await page.locator("//textarea[@placeholder='Current Address']").fill(data.currentaddress)
+    await page.locator("//textarea[@id='permanentAddress']").fill(data.permanentaddress)
+    await page.locator("//button[@id='submit']").click()
+    // Check output section is visible and contains correct data
+    const output = page.locator('.border');
+    await expect(output).toBeVisible();
+    
+    // Check if the output contains the submitted data
+    await expect(page.locator('p#name')).toContainText(`Name:${data.FullName}`);
+    await expect(page.locator('p#email')).toContainText(`Email:${data.email}`);
+    await expect(page.locator('p#currentAddress')).toContainText(`Current Address :${data.currentaddress}`);
+    await expect(page.locator('p#permanentAddress')).toContainText(`Permananet Address :${data.permanentaddress}`);
 
 })

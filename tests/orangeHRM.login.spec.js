@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test('Verify login with valid credentials', async ({ page }) => {
+test.only('Verify login with valid credentials', async ({ page }) => {
 
   await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
@@ -10,6 +10,7 @@ test('Verify login with valid credentials', async ({ page }) => {
 await page.locator("//input[@type='password']").fill('admin123')
 
 await page.locator("//button[@type='submit']").click()
+//await expect(page.locator("//p[text()='Forgot your password? ']")).toBeVisible()
 
 //Verify Method 1
 
@@ -27,7 +28,7 @@ test('Verify login with valid username and invalid password', async ({ page }) =
 
   await page.locator("//input[@placeholder='Username']").fill("Admin")
 
-await page.locator("//input[@type='password']").fill("dhfhbddgdg")
+await page.locator("//input[@type='password']").fill("admin123")
 
 await page.locator("//button[@type='submit']").click()
 
@@ -42,7 +43,7 @@ test('Verify login with Invalid username and valid password', async ({ page }) =
 
   await page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
 
-  await page.locator("//input[@placeholder='Username']").fill("cshgchsc")
+  await page.locator("//input[@placeholder='Username']").fill("ffhhgjndg")
 
 await page.locator("//input[@type='password']").fill("admin123")
 
@@ -68,6 +69,7 @@ await page.locator("//button[@type='submit']").click()
 
 
 await expect(page.locator("//p[text()='Invalid credentials']")).toBeVisible()
+//await expect(page.locator("//p[text()='Forgot your password? ']")).toBeVisible()
 
 
 
